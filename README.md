@@ -13,12 +13,6 @@ OS X & Linux:
 npm install my-crazy-module --save
 ```
 
-Windows:
-
-```sh
-edit autoexec.bat
-```
-
 ## Usage example
 
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
@@ -34,15 +28,17 @@ make install
 npm test
 ```
 
-## Meta
+## Database Schema
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+[![Database Schema](https://i.postimg.cc/66nrJp7G/Screen-Shot-2021-09-04-at-3-53-46-PM.png)](https://postimg.cc/CdMBbYsF)
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+## Contributors
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+👤  **Matt Kragen**
+- [GitHub](https://github.com/InOmn1aParatus)
+- [LinkedIn](https://www.linkedin.com/in/mattkragen/)
 
-## Contributing
+## How to contribute
 
 1. Fork it (<https://github.com/yourname/yourproject/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
