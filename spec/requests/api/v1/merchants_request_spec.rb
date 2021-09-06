@@ -37,12 +37,11 @@ describe "Merchants API" do
 
         expect(merchant).to have_key(:name)
         expect(merchant[:name]).to be_a(String)
-
       end
     end
 
     describe 'optional query parameters' do
-      it 'displays default of 20 items per page' do
+      it 'displays default of 20 merchants per page' do
         create_list(:merchant, 30)
 
         get '/api/v1/merchants'
@@ -54,7 +53,7 @@ describe "Merchants API" do
         expect(merchants.count).to eq(20)
       end
       
-      it 'displays optional number of items per page' do
+      it 'displays optional number of merchants per page' do
         create_list(:merchant, 30)
 
         get '/api/v1/merchants?per_page=15'
@@ -72,6 +71,10 @@ describe "Merchants API" do
         get '/api/v1/merchants?page=2'
 
         expect(response).to be_successful
+
+        merchants = JSON.parse(response.body, symbolize_names: true)
+
+        expect(merchants.count).to eq(10)
       end
     end
   end
