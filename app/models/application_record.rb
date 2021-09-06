@@ -8,5 +8,4 @@ class ApplicationRecord < ActiveRecord::Base
       limit(per_page).offset(per_page * (page_number - 1))
     end
   end
-  
 end
