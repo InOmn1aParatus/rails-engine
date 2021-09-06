@@ -28,46 +28,46 @@ describe "Items API" do
           expect(item[:unit_price]).to be_an(Float)
           
           expect(item).to have_key(:merchant_id)
-          expect(item[:unit_price]).to be_an(Integer)
+          expect(item[:merchant_id]).to be_an(Integer)
         end
       end
     end
 
     describe 'optional query parameters' do
       it 'displays default of 20 items per page' do
-        create_list(:merchant, 30)
+        create_list(:item, 30)
 
-        get '/api/v1/merchants'
+        get '/api/v1/items'
 
         expect(response).to be_successful
 
-        merchants = JSON.parse(response.body, symbolize_names: true)
+        items = JSON.parse(response.body, symbolize_names: true)
 
-        expect(merchants.count).to eq(20)
+        expect(items.count).to eq(20)
       end
       
-      it 'displays optional number of merchants per page' do
-        create_list(:merchant, 30)
+      it 'displays optional number of items per page' do
+        create_list(:item, 30)
 
-        get '/api/v1/merchants?per_page=15'
+        get '/api/v1/items?per_page=15'
 
         expect(response).to be_successful
 
-        merchants = JSON.parse(response.body, symbolize_names: true)
+        items = JSON.parse(response.body, symbolize_names: true)
 
-        expect(merchants.count).to eq(15)
+        expect(items.count).to eq(15)
       end
 
       it 'can navigate to a specific page' do
-        create_list(:merchant, 30)
+        create_list(:item, 30)
 
-        get '/api/v1/merchants?page=2'
+        get '/api/v1/items?page=2'
 
         expect(response).to be_successful
 
-        merchants = JSON.parse(response.body, symbolize_names: true)
+        items = JSON.parse(response.body, symbolize_names: true)
 
-        expect(merchants.count).to eq(10)
+        expect(items.count).to eq(10)
       end
     end
   end
