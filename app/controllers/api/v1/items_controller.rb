@@ -5,7 +5,7 @@ module Api
         @items = Item.results(per_page, page_number)
         render json: ItemSerializer.new(@items)
       end
-      
+
       def show
         @item = Item.find(params[:id])
         render json: ItemSerializer.new(@item)
