@@ -5,6 +5,16 @@ This project is intended to replicate an E-Commerce Application that uses servic
 
 ![](header.png)
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Features](#features)
+- [Usage Example](#usage-example)
+- [Development Setup](#development-setup)
+- [Database Schema](#database-schema)
+- [Contributors](#contributors)
+- [How to Contribute](#how-to-contribute)
+
 ## Installation
 
 OS X & Linux:
@@ -12,6 +22,12 @@ OS X & Linux:
 ```sh
 npm install my-crazy-module --save
 ```
+
+## Features
+
+* A user can retrieve lists of resources in the database via a collection of endpoints associated with those particular resources.
+* It is possible to view all records associated with a particular resource by using one of the "relationship endpoints"
+e.g. `GET /api/v1/merchants/:id/items`, or `GET /api/v1/items/:id/merchant`
 
 ## Usage example
 
@@ -38,7 +54,7 @@ npm test
 - [GitHub](https://github.com/InOmn1aParatus)
 - [LinkedIn](https://www.linkedin.com/in/mattkragen/)
 
-## How to contribute
+## How to Contribute
 
 1. Fork it (<https://github.com/InOmn1aParatus/rails-engine/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
