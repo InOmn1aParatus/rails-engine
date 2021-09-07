@@ -23,10 +23,10 @@ class ApplicationController < ActionController::API
   def record_not_found(exception)
     render json:
       {
-        message: 'The specified record could not be found',
+        message: "Uh, oh... I couldn't find that record",
         errors: [exception.message]
       },
-      status: :not_found
+      status: :404
   end
   
   def unprocessable_entity(exception)
