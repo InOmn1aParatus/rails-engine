@@ -145,4 +145,29 @@ describe 'Items API' do
       end
     end
   end
+
+  context 'sad path' do
+    describe 'RESTful actions' do
+      it 'throws an error when attempting to create incomplete item' do
+        merchant_id = create(:merchant).id
+        item_params = ({
+                        name: 'Banana',
+                        unit_price: 1.11,
+                        merchant_id: merchant_id
+                      })
+        headers = {"CONTENT_TYPE" => "application/json"}
+        
+        post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+        
+        expected_errors = {
+          message: "That request failed",
+          errors: ["Description can't be blank"]
+        }
+        thrown_errors = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(thrown_errors).to eq(expected_errors)
+      end
+    end
+  end
 end

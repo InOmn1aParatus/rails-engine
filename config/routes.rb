@@ -7,6 +7,12 @@ Rails.application.routes.draw do
         resources :items, only: [:index]
       end
       resources :items, only: [:index, :show, :create, :update, :destroy]
+
+      # get '/api/vi/items/find', to: 
+      # get '/api/vi/items/find_all', to: 
+      # get '/api/vi/merchants/find', to: 
+      # get '/api/vi/merchants/find_all', to: 
+      
     end
   end
 end

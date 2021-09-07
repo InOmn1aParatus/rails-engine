@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
 
   def per_page
     if params[:per_page].to_i.positive?
@@ -19,9 +20,22 @@ class ApplicationController < ActionController::API
 
   private
 
-  # def record_not_found(exception)
-  #   render json: {error: exception.message}.to_json, status: 404
-  #   return
-  # end
+  def record_not_found(exception)
+    render json:
+      {
+        message: 'The specified record could not be found',
+        errors: [exception.message]
+      },
+      status: :not_found
+  end
+  
+  def unprocessable_entity(exception)
+    render json:
+      {
+        message: 'That request failed',
+        errors: exception.record.errors.full_messages
+      },
+      status: :unprocessable_entity
+  end
 
 end
