@@ -26,7 +26,7 @@ class ApplicationController < ActionController::API
         message: "Uh, oh... I couldn't find that record",
         errors: [exception.message]
       },
-      status: :404
+      status: 404
   end
   
   def unprocessable_entity(exception)
