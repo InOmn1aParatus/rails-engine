@@ -8,9 +8,10 @@ Rails.application.routes.draw do
       end
 
       get '/api/v1/revenue/merchants'
-      
+
       resources :items, only: [:index, :show, :create, :update, :destroy]
 
+      # get '/api/v1/revenue/merchants', to:
       # get '/api/vi/items/find', to: 
       # get '/api/vi/items/find_all', to: 
       # get '/api/vi/merchants/find', to: 
