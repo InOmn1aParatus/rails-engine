@@ -145,19 +145,19 @@ describe 'Items API' do
       end
     end
   end
-  
+
   context 'sad path' do
     describe 'basic requests' do
       it 'throws custom 404 error when a record cannot be found' do
-        nonexistent_item_id = 101
+        nonexistent_item_id = 101_101_101
         get "/api/v1/items/#{nonexistent_item_id}"
-  
+
         expected_errors = {
           message: "Uh, oh... I couldn't find that record",
           errors: ["Couldn't find Item with 'id'=#{nonexistent_item_id}"]
         }
         thrown_errors = JSON.parse(response.body, symbolize_names: true)
-  
+
         expect(response).to_not be_successful
         expect(thrown_errors).to eq(expected_errors)
       end
