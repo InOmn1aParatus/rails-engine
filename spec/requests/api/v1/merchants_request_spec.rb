@@ -44,6 +44,20 @@ describe 'Merchants API' do
         expect(merchant[:data][:attributes]).to have_key(:name)
         expect(merchant[:data][:attributes][:name]).to be_a(String)
       end
+
+      it 'displays items associated with specific merchant' do
+        id = create(:merchant).id
+        create_list(:item, 10, merchant_id: id)
+
+        get "/api/v1/merchants/#{id}"
+        merchant = JSON.parse(response.body, symbolize_names: true)
+        expect(response).to be_successful
+
+        expect(merchant[:data]).to have_key(:relationships)
+        items = merchant[:data][:relationships][:items][:data]
+
+        expect(items.count).to eq(10)
+      end
     end
 
     describe 'optional query parameters' do

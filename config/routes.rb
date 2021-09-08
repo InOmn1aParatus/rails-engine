@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index]
       end
+
+      get '/api/v1/revenue/merchants'
+      
       resources :items, only: [:index, :show, :create, :update, :destroy]
 
       # get '/api/vi/items/find', to: 

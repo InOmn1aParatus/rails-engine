@@ -161,6 +161,20 @@ describe 'Items API' do
         expect(response).to_not be_successful
         expect(thrown_errors).to eq(expected_errors)
       end
+
+      it 'displays merchant associated with specific merchant' do
+        item = create(:item)
+
+        get "/api/v1/items/#{item.id}"
+        item_hash = JSON.parse(response.body, symbolize_names: true)
+        expect(response).to be_successful
+
+        expect(item_hash[:data]).to have_key(:relationships)
+        merchant = item_hash[:data][:relationships][:merchant][:data]
+
+        expect(merchant).to have_key(:id)
+        expect(merchant[:id]).to eq(item.merchant_id.to_s)
+      end
     end
 
     describe 'RESTful actions' do
