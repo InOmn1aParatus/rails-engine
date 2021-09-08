@@ -4,7 +4,7 @@ class MerchantSerializer
 
   def items
     object.items.map do |item|
-      ::MerchantSerializer.new(item).attributes
+      ItemSerializer.new(item)
     end
   end
 end
