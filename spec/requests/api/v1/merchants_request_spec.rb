@@ -84,4 +84,22 @@ describe 'Merchants API' do
       end
     end
   end
+
+  context 'sad path' do
+    describe 'basic requests' do
+      it 'throws custom 404 error when a record cannot be found' do
+        nonexistent_merchant_id = 101
+        get "/api/v1/merchants/#{nonexistent_merchant_id}"
+
+        expected_errors = {
+          message: "Uh, oh... I couldn't find that record",
+          errors: ["Couldn't find Merchant with 'id'=#{nonexistent_merchant_id}"]
+        }
+        thrown_errors = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(thrown_errors).to eq(expected_errors)
+      end
+    end
+  end
 end
