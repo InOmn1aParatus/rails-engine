@@ -4,7 +4,7 @@ RSpec.describe 'Item search' do
   context 'happy path' do
     describe 'find one result' do
       it 'returns one item by case-sensitive search params' do
-    
+        
       end
     end
 
