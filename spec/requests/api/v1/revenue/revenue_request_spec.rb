@@ -29,9 +29,20 @@ RSpec.describe 'Revenue requests' do
   
           expect(response).to be_successful
           merchants_array = JSON.parse(response.body, symbolize_names: true)[:data]
-          require 'pry'; binding.pry
+
+          expect(merchants_array).to be_an(Array)
           expect(merchants_array.count).to eq(2)
   
+          merchants_array.each do |merchant|
+            expect(merchant).to have_key(:id)
+            expect(merchant[:id]).to be_a(String)
+            
+            expect(merchant).to have_key(:attributes)
+            expect(merchant[:attributes]).to be_a(Hash)
+
+            expect(merchant[:attributes]).to have_key(:name)
+            expect(merchant[:attributes][:name]).to be_a(String)
+          end
         end
       end
     end
