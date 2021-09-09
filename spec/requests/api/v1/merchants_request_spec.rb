@@ -45,19 +45,35 @@ describe 'Merchants API' do
         expect(merchant[:data][:attributes][:name]).to be_a(String)
       end
 
-      # it 'displays items associated with specific merchant' do
-      #   id = create(:merchant).id
-      #   create_list(:item, 10, merchant_id: id)
+      it 'displays items associated with specific merchant' do
+        id = create(:merchant).id
+        create_list(:item, 10, merchant_id: id)
 
-      #   get "/api/v1/merchants/#{id}"
-      #   merchant = JSON.parse(response.body, symbolize_names: true)
-      #   expect(response).to be_successful
+        get "/api/v1/merchants/#{id}/items"
 
-      #   expect(merchant[:data][:attributes]).to have_key(:items)
-      #   items = merchant[:data][:attributes][:items]
+        expect(response).to be_successful
+        data = JSON.parse(response.body, symbolize_names: true)[:data]
 
-      #   expect(items.count).to eq(10)
-      # end
+        expect(data.size).to eq(10)
+        
+        data.each do |item|
+          expect(item).to have_key(:id)
+          expect(item[:id]).to be_a(String)
+          
+          expect(item[:attributes]).to have_key(:name)
+          expect(item[:attributes][:name]).to be_a(String)
+          
+          expect(item[:attributes]).to have_key(:description)
+          expect(item[:attributes][:description]).to be_a(String)
+          
+          expect(item[:attributes]).to have_key(:unit_price)
+          expect(item[:attributes][:unit_price]).to be_a(Numeric)
+          
+          expect(item[:attributes]).to have_key(:merchant_id)
+          expect(item[:attributes][:merchant_id]).to be_a(Numeric)
+          expect(item[:attributes][:merchant_id]).to eq(id)
+        end
+      end
     end
 
     describe 'optional query parameters' do
