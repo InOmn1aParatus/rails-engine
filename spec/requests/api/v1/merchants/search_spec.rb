@@ -7,12 +7,12 @@ RSpec.describe 'Merchant search' do
         valid = create(:merchant, name: 'test1')
         invalid1 = create(:merchant, name: 'test2')
         invalid2 = create(:merchant, name: 'test3')
-        
-        get '/api/v1/merchants/find', params: {name: 'test'}
+
+        get '/api/v1/merchants/find', params: { name: 'test' }
 
         expect(response).to be_successful
         merchant = JSON.parse(response.body, symbolize_names: true)[:data].first[:attributes]
-        
+
         expect(merchant[:name]).to eq(valid[:name])
       end
     end
@@ -23,12 +23,12 @@ RSpec.describe 'Merchant search' do
         valid2 = create(:merchant, name: 'test2')
         valid3 = create(:merchant, name: 'test3')
         invalid = create(:merchant, name: 'James')
-        
-        get '/api/v1/merchants/find_all', params: {name: 'test'}
+
+        get '/api/v1/merchants/find_all', params: { name: 'test' }
 
         expect(response).to be_successful
         merchants = JSON.parse(response.body, symbolize_names: true)[:data]
-        
+
         expect(merchants[0][:id]).to eq(valid1[:id].to_s)
         expect(merchants[1][:id]).to eq(valid2[:id].to_s)
         expect(merchants[2][:id]).to eq(valid3[:id].to_s)
@@ -42,7 +42,7 @@ RSpec.describe 'Merchant search' do
 
           expect(merchant[:attributes]).to have_key(:name)
           expect(merchant[:attributes][:name]).to be_a(String)
-          
+
           expect(merchant[:attributes][:name]).to_not eq(invalid[:name])
         end
       end
@@ -55,12 +55,12 @@ RSpec.describe 'Merchant search' do
     #     valid = create(:merchant, name: 'test1')
     #     invalid1 = create(:merchant, name: 'test2')
     #     invalid2 = create(:merchant, name: 'test3')
-        
+
     #     get '/api/v1/merchants/find', params: {name: 'test'}
 
     #     expect(response).to be_successful
     #     merchant = JSON.parse(response.body, symbolize_names: true)[:data].first[:attributes]
-        
+
     #     expect(merchant[:name]).to eq(valid[:name])
     #   end
     # end
@@ -71,12 +71,12 @@ RSpec.describe 'Merchant search' do
     #     valid2 = create(:merchant, name: 'test2')
     #     valid3 = create(:merchant, name: 'test3')
     #     invalid = create(:merchant, name: 'James')
-        
+
     #     get '/api/v1/merchants/find_all', params: {name: 'test'}
 
     #     expect(response).to be_successful
     #     merchants = JSON.parse(response.body, symbolize_names: true)[:data]
-        
+
     #     expect(merchants[0][:id]).to eq(valid1[:id].to_s)
     #     expect(merchants[1][:id]).to eq(valid2[:id].to_s)
     #     expect(merchants[2][:id]).to eq(valid3[:id].to_s)
@@ -90,7 +90,7 @@ RSpec.describe 'Merchant search' do
 
     #       expect(merchant[:attributes]).to have_key(:name)
     #       expect(merchant[:attributes][:name]).to be_a(String)
-          
+
     #       expect(merchant[:attributes][:name]).to_not eq(invalid[:name])
     #     end
     #   end

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
       20
     end
   end
-  
+
   def page_number
     if params[:page].to_i >= 1
       params[:page].to_i
@@ -19,25 +19,25 @@ class ApplicationController < ActionController::API
       1
     end
   end
-  
+
   private
-  
+
   def record_not_found(exception)
     render json: {
       message: "Uh, oh... I couldn't find that record",
       errors: [exception.message]
     },
-    status: :not_found
+           status: :not_found
   end
-  
+
   def unprocessable_entity(exception)
     render json: {
       message: 'That request failed',
       errors: exception.record.errors.full_messages
     },
-    status: :unprocessable_entity
+           status: :unprocessable_entity
   end
-  
+
   # def bad_request(exception)
   #   render json: {
   #     message: 'Something is off about your request...',

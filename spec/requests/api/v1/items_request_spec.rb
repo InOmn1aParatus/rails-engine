@@ -61,9 +61,9 @@ describe 'Items API' do
         id = create(:item).id
 
         get "/api/v1/items/#{id}/merchant"
-        
+
         expect(response).to be_successful
-        
+
         merchant = JSON.parse(response.body, symbolize_names: true)[:data]
 
         expect(merchant).to have_key(:id)
@@ -191,7 +191,7 @@ describe 'Items API' do
         merchant_id = item_hash[:data][:attributes][:merchant_id]
 
         expect(merchant_id).to eq(item.merchant_id)
-        
+
         # expect(merchant).to have_key(:name)
         # expect(merchant[:name]).to eq(item.merchant.name)
       end

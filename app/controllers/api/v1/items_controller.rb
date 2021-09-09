@@ -2,7 +2,7 @@ module Api
   module V1
     class ItemsController < ApplicationController
       before_action :set_merchant
-      
+
       def index
         if @merchant
           render json: ItemSerializer.new(@merchant.items)
