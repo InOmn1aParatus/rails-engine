@@ -14,4 +14,9 @@ class ApplicationRecord < ActiveRecord::Base
       .order(:name)
       .limit(1)
   end
+  
+  def self.find_all(name)
+    where('name ILIKE ?', "%#{name}%")
+      .order(:name)
+  end
 end
