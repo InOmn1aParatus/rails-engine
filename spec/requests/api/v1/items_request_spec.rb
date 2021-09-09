@@ -56,6 +56,25 @@ describe 'Items API' do
         expect(item[:data][:attributes]).to have_key(:merchant_id)
         expect(item[:data][:attributes][:merchant_id]).to be_a(Numeric)
       end
+
+      xit 'displays merchant associated with specific item' do
+        id = create(:item).id
+
+        get "/api/v1/items/#{id}/merchant"
+        
+        expect(response).to be_successful
+        
+        merchant = JSON.parse(response.body, symbolize_names: true)[:data]
+
+        expect(merchant).to have_key(:id)
+        expect(merchant[:id]).to be_a(String)
+
+        expect(merchant).to have_key(:attributes)
+        expect(merchant[:attributes]).to be_a(Hash)
+
+        expect(merchant[:attributes]).to have_key(:name)
+        expect(merchant[:attributes][:name]).to be_a(String)
+      end
     end
 
     describe 'optional query parameters' do
@@ -65,7 +84,6 @@ describe 'Items API' do
         get '/api/v1/items'
 
         expect(response).to be_successful
-
         items = JSON.parse(response.body, symbolize_names: true)
 
         expect(items[:data].count).to eq(20)

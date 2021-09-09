@@ -31,9 +31,9 @@ describe 'Merchants API' do
 
         get "/api/v1/merchants/#{id}"
 
-        merchant = JSON.parse(response.body, symbolize_names: true)
-
         expect(response).to be_successful
+        
+        merchant = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchant[:data]).to have_key(:id)
         expect(merchant[:data][:id]).to be_a(String)
