@@ -24,8 +24,8 @@ describe 'Items API' do
           expect(item[:attributes]).to have_key(:unit_price)
           expect(item[:attributes][:unit_price]).to be_a(Numeric)
 
-          expect(item[:attributes]).to have_key(:merchant)
-          expect(item[:attributes][:merchant]).to be_a(Hash)
+          expect(item[:attributes]).to have_key(:merchant_id)
+          expect(item[:attributes][:merchant_id]).to be_a(Numeric)
         end
       end
 
@@ -53,8 +53,8 @@ describe 'Items API' do
         expect(item[:data][:attributes]).to have_key(:unit_price)
         expect(item[:data][:attributes][:unit_price]).to be_a(Numeric)
 
-        expect(item[:data][:attributes]).to have_key(:merchant)
-        expect(item[:data][:attributes][:merchant]).to be_a(Hash)
+        expect(item[:data][:attributes]).to have_key(:merchant_id)
+        expect(item[:data][:attributes][:merchant_id]).to be_a(Numeric)
       end
     end
 
@@ -169,14 +169,13 @@ describe 'Items API' do
         item_hash = JSON.parse(response.body, symbolize_names: true)
         expect(response).to be_successful
 
-        expect(item_hash[:data][:attributes]).to have_key(:merchant)
-        merchant = item_hash[:data][:attributes][:merchant]
+        expect(item_hash[:data][:attributes]).to have_key(:merchant_id)
+        merchant_id = item_hash[:data][:attributes][:merchant_id]
 
-        expect(merchant).to have_key(:id)
-        expect(merchant[:id]).to eq(item.merchant_id)
+        expect(merchant_id).to eq(item.merchant_id)
         
-        expect(merchant).to have_key(:name)
-        expect(merchant[:name]).to eq(item.merchant.name)
+        # expect(merchant).to have_key(:name)
+        # expect(merchant[:name]).to eq(item.merchant.name)
       end
     end
 
