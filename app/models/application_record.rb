@@ -8,4 +8,10 @@ class ApplicationRecord < ActiveRecord::Base
       limit(per_page).offset(per_page * (page_number - 1))
     end
   end
+
+  def self.find_one(name)
+    where('name ILIKE ?', "%#{name}%")
+      .order(:name)
+      .limit(1)
+  end
 end

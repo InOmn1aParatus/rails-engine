@@ -4,7 +4,15 @@ RSpec.describe 'Merchant search' do
   context 'happy path' do
     describe 'find one result' do
       it 'returns one merchant by case-sensitive search params' do
-        # get '/api/vi/merchants/find?name=test'
+        valid = create(:merchant, name: 'test1')
+        invalid1 = create(:merchant, name: 'test2')
+        invalid2 = create(:merchant, name: 'test3')
+        
+        get '/api/v1/merchants/find?name=test'
+
+        expect(response).to be_successful
+        merchant = JSON.parse(response.body, symbolize_names: true)
+        # require 'pry'; binding.pry
       end
     end
 
