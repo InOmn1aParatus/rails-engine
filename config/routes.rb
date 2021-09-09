@@ -18,8 +18,7 @@ Rails.application.routes.draw do
         # resources :merchant, only: [:index]
       end
 
-
-      # get '/api/v1/revenue/merchants', to:
+      get '/revenue/merchants', to: 'revenue/merchants#index'
       
     end
   end
