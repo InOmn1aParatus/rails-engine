@@ -57,7 +57,7 @@ describe 'Items API' do
         expect(item[:data][:attributes][:merchant_id]).to be_a(Numeric)
       end
 
-      xit 'displays merchant associated with specific item' do
+      it 'displays merchant associated with specific item' do
         id = create(:item).id
 
         get "/api/v1/items/#{id}/merchant"

@@ -70,7 +70,7 @@ RSpec.describe 'Merchant search' do
         expect(thrown_errors).to eq(expected_errors)
       end
 
-      it 'throws 404 error if no match is found' do
+      # it 'throws 404 error if no match is found' do
       #   get '/api/v1/merchants/find?name=NOMATCH'
 
       #   expected_errors = {
