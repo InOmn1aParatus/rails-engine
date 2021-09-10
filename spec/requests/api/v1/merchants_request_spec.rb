@@ -92,7 +92,7 @@ describe 'Merchants API' do
       it 'displays optional number of merchants per page' do
         create_list(:merchant, 30)
 
-        get '/api/v1/merchants?per_page=15'
+        get '/api/v1/merchants', params: { per_page: 15 }
 
         expect(response).to be_successful
 
@@ -104,7 +104,7 @@ describe 'Merchants API' do
       it 'can navigate to a specific page' do
         create_list(:merchant, 30)
 
-        get '/api/v1/merchants?page=2'
+        get '/api/v1/merchants', params: { page: 2 }
 
         expect(response).to be_successful
 
@@ -122,8 +122,23 @@ describe 'Merchants API' do
         get "/api/v1/merchants/#{nonexistent_merchant_id}"
 
         expected_errors = {
-          message: "Uh, oh... I couldn't find that record",
-          errors: ["Couldn't find Merchant with 'id'=#{nonexistent_merchant_id}"]
+          errors: ["Couldn't find Merchant with 'id'=#{nonexistent_merchant_id}"],
+          message: "Uh, oh... I couldn't find that record"
+        }
+        thrown_errors = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(thrown_errors).to eq(expected_errors)
+      end
+    end
+
+    describe 'optional params' do
+      it 'throws 400 error if no params given' do
+        get '/api/v1/merchants/find?name='
+
+        expected_errors = {
+          errors: "ActionController::BadRequest",
+          message: 'Something is off about your request...'
         }
         thrown_errors = JSON.parse(response.body, symbolize_names: true)
 
