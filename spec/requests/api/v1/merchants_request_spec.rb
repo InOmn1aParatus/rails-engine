@@ -131,20 +131,5 @@ describe 'Merchants API' do
         expect(thrown_errors).to eq(expected_errors)
       end
     end
-
-    describe 'optional params' do
-      it 'throws 400 error if no params given' do
-        get '/api/v1/merchants/find?name='
-
-        expected_errors = {
-          errors: "ActionController::BadRequest",
-          message: 'Something is off about your request...'
-        }
-        thrown_errors = JSON.parse(response.body, symbolize_names: true)
-
-        expect(response).to_not be_successful
-        expect(thrown_errors).to eq(expected_errors)
-      end
-    end
   end
 end
