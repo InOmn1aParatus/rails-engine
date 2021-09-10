@@ -7,7 +7,7 @@ module Api
             Merchant.top_revenue(params[:quantity])
           )
         end
-        
+
         def show
           render json: MerchantRevenueSerializer.new(
             Merchant.total_revenue(params[:id])

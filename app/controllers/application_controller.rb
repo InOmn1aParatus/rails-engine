@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
       message: "Uh, oh... I couldn't find that record",
       errors: [exception.message]
     },
-    status: :not_found
+           status: :not_found
   end
 
   def unprocessable_entity(exception)
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
       message: 'That request failed',
       errors: exception.record.errors.full_messages
     },
-    status: :unprocessable_entity
+           status: :unprocessable_entity
   end
 
   def bad_request(exception)
@@ -43,6 +43,6 @@ class ApplicationController < ActionController::API
       message: 'Something is off about your request...',
       errors: exception.message
     },
-    status: :bad_request
+           status: :bad_request
   end
 end

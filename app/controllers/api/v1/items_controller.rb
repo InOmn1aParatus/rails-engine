@@ -19,7 +19,7 @@ module Api
       def create
         item = Item.create!(item_params)
         render json: ItemSerializer.new(item),
-        status: :created
+               status: :created
       end
 
       def update

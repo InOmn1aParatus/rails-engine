@@ -61,7 +61,7 @@ RSpec.describe 'Merchant search' do
         get '/api/v1/merchants/find?name='
 
         expected_errors = {
-          errors: "ActionController::BadRequest",
+          errors: 'ActionController::BadRequest',
           message: 'Something is off about your request...'
         }
         thrown_errors = JSON.parse(response.body, symbolize_names: true)
