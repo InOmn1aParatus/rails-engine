@@ -13,4 +13,16 @@ class Merchant < ApplicationRecord
       .order(revenue: :desc)
       .limit(qty)
   end
+
+  def self.total_revenue(id)
+      joins(invoices: %i[transactions invoice_items])
+        .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+        .where(
+          merchants: { id: id },
+          invoices: { status: 'shipped' },
+          transactions: { result: 'success' }
+        )
+        .group(:id)
+        .first
+    end
 end
