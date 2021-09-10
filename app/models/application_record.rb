@@ -11,10 +11,12 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.find_one(name)
     raise ActionController::BadRequest if name.blank?
-
+    
     where('name ILIKE ?', "%#{name}%")
       .order(:name)
       .limit(1)
+    
+    # raise ActiveRecord::RecordNotFound
   end
 
   def self.find_all(name)
